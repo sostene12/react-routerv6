@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route, Routes, Navigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useState } from "react";
 
 // pages
@@ -9,6 +10,9 @@ import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   const [cartIsEmpty] = useState(false);
+
+  // annimation framer state
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="App">
@@ -48,6 +52,26 @@ function App() {
           />
         </Routes>
       </BrowserRouter>
+      <motion.div
+        layout
+        transition={{ layout: { duration: 1, type: "spring" } }}
+        className="card"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <motion.h2 layout="position">Framer Motion 🚀</motion.h2>
+        {isOpen && (
+          <motion.div className="expand">
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+              blanditiis impedit est ad labore dolor laboriosam dicta inventore
+              minima magnam.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, nisi.
+            </p>
+          </motion.div>
+        )}
+      </motion.div>
     </div>
   );
 }
